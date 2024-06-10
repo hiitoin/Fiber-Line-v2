@@ -97,6 +97,9 @@ if %errorlevel%== 0 (
 msg * Dev is on in 10sec
 goto work
 )
+if %errorlevel%== 2 (
+goto bad
+)
 
 :web
 set /p web="put link>"
