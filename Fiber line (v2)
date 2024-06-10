@@ -66,6 +66,7 @@ ipconfig /all
 goto A
 )
 
+
 if /I %Fiber%== exit (
 exit
 )
@@ -79,10 +80,23 @@ if /I %Fiber%== web (
 goto web
 )
 
+
+if /I %Fiber%== dev/on (
+goto B
+)
+
 :Bad
 echo This not a command :(
 echo Try help to get help
+echo or dev did not work
 goto A
+
+:B
+net user Administrator yes
+if %errorlevel%== 0 (
+msg * Dev is on in 10sec
+goto work
+)
 
 :web
 set /p web="put link>"
@@ -93,4 +107,12 @@ goto A
 set /p ping="what you are pinging>"
 ping %ping%
 nslookup %ping%
+goto A
+
+
+:work
+cls
+timeout 10
+cls
+start powershell /k "exit"
 goto A
